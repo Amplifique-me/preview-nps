@@ -1,0 +1,25 @@
+<div class="wrapper">
+
+  <a href="https://amplifique.me/pesquisa-nps"><img src="https://app.amplifique.me/assets/img/logo_amplifiqueme.svg"></a>
+
+  <div class="card">
+
+    <h3 class="amp-title text-center">Preview do NPS In App</h3>
+
+
+    <form (ngSubmit)="goToPreview()">
+      <div class="amp-field amp-email">
+        <input type="text" name="Nome" [(ngModel)]="store.name" email="" required="" class="amp-input-lg" placeholder="Nome">
+      </div>
+      <div class="amp-field amp-email">
+        <input type="email" name="Email" [(ngModel)]="store.email" email="" required="" class="amp-input-lg" placeholder="E-mail">
+      </div>
+      <div class="amp-field amp-email">
+        <input type="url" name="siteApp" [(ngModel)]="store.iframeUrl" email="" required="" class="amp-input-lg" placeholder="Site/App">
+      </div>
+   
+
+      <button type="submit" class="amp-btn">Ir para a Preview</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.card {
+  width: 100%;
+  margin: 64px auto 0;
+  padding: 24px;
+  max-width: 423px;
+  box-shadow: 0 0 15px 0 rgba(10, 31, 68, 0.1) !important;
+  border-radius: 6px;
+  background-color: #fff;
+}
+.wrapper {
+  width: 100%;
+  top: 126px;
+  right: 0;
+  position: absolute;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 24px;
+  text-align: center;
+}
+img {
+  width: 250px;
+  height: auto;
+}
+h3 {
+  font-size: 18px;
+  line-height: 22px;
+  color: #0a1f44;
+  margin-bottom: 8px !important;
+  font-weight: 600;
+}
