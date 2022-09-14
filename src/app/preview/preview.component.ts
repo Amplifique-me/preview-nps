@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {StoreService} from '../_services/store.service';
-import {AmpCfService} from '@amplifique.me/ngx-amplifiqueme';
+import { Component, OnInit } from '@angular/core';
+import { StoreService } from '../_services/store.service';
+import { AmpCfService } from '@amplifique.me/ngx-amplifiqueme';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-preview',
@@ -17,12 +17,12 @@ export class PreviewComponent implements OnInit {
     public route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
 
-    if(this.store.iframeUrl.length != 0){
+  ngOnInit(): void {
+    if (this.store.iframeUrl.length != 0) {
       this.showIframe = true;
     }
-    if(this.route.snapshot.params.survey){
+    if (this.route.snapshot.params.survey) {
       this.survey = this.route.snapshot.params.survey;
     }
     // this.showNpsSurvey();
@@ -33,11 +33,10 @@ export class PreviewComponent implements OnInit {
     this.ampCfSurvey.setData({
       email: this.store.email,
       name: this.store.name,
-      survey:this.survey,
+      survey: this.survey,
       created_at: new Date().getTime(),
-      force:true
+      force: true,
     });
-
 
     this.ampCfSurvey.run();
   }

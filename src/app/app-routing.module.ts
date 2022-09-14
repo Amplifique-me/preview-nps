@@ -7,6 +7,7 @@ import { PreviewComponent } from './preview/preview.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'preview', component: PreviewComponent},
+  { path: 'preview/:survey', component: PreviewComponent},
 ];
 
 @NgModule({
