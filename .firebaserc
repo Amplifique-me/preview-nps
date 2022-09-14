@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "amplifique-me"
+  },
+  "targets": {
+    "amplifique-me": {
+      "hosting": {
+        "preview": [
+          "preview-amplifiqueme"
+        ]
+      }
+    }
+  }
+}

@@ -7,19 +7,28 @@
     <h3 class="amp-title text-center">Preview do NPS In App</h3>
 
 
-    <form (ngSubmit)="goToPreview()">
+    <form #form="ngForm" (ngSubmit)="goToPreview()">
       <div class="amp-field amp-email">
-        <input type="text" name="Nome" [(ngModel)]="store.name" email="" required="" class="amp-input-lg" placeholder="Nome">
+        <input type="text" name="Nome" [(ngModel)]="store.name" [minLength]="1" required class="amp-input-lg" placeholder="Nome">
       </div>
       <div class="amp-field amp-email">
-        <input type="email" name="Email" [(ngModel)]="store.email" email="" required="" class="amp-input-lg" placeholder="E-mail">
+        <input type="email" name="Email" [(ngModel)]="store.email" email required="" class="amp-input-lg" placeholder="E-mail">
       </div>
       <div class="amp-field amp-email">
-        <input type="url" name="siteApp" [(ngModel)]="store.iframeUrl" email="" required="" class="amp-input-lg" placeholder="Site/App">
+        <input type="url" name="siteApp" [(ngModel)]="store.iframeUrl" [minLength]="1" required="" class="amp-input-lg" placeholder="Site/App">
       </div>
-   
+      <div class="amp-field amp-select-new">
+        <select name="surveyType" id="surveyType" required [(ngModel)]="store.campaignId" class="amp-input-lg">
+          <option value="" disabled selected>Selecione uma Métrica</option>
+          <option value="60e336ef69a03a000e20164d">NPS</option>
+          <option value="622a3e3a3f46e18fa97f8621">CSAT</option>
+          <option value="623886c3adeeb8b084efb4ce">CES</option>
+        </select>
+        <span class="amp-icon-down-arrow-1"></span>
+      </div>
 
-      <button type="submit" class="amp-btn">Ir para a Preview</button>
+
+      <button type="submit" [disabled]="!form.form.valid" class="amp-btn">Ir para a Preview</button>
     </form>
   </div>
 </div>

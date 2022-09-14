@@ -1,30 +1,44 @@
 import {Component, OnInit} from '@angular/core';
 import {StoreService} from '../_services/store.service';
-import {AmpNpsService} from '@amplifique.me/ngx-amplifiqueme';
+import {AmpCfService} from '@amplifique.me/ngx-amplifiqueme';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-preview',
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss'],
 })
 export class PreviewComponent implements OnInit {
+  showIframe = false;
+  survey = this.store.campaignId;
   constructor(
     public store: StoreService,
-    public ampNpsSurvey: AmpNpsService
+    public ampCfSurvey: AmpCfService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
 
-    this.showNpsSurvey();
+    if(this.store.iframeUrl.length != 0){
+      this.showIframe = true;
+    }
+    if(this.route.snapshot.params.survey){
+      this.survey = this.route.snapshot.params.survey;
+    }
+    // this.showNpsSurvey();
   }
 
   showNpsSurvey() {
-    this.ampNpsSurvey.setData({
+    console.log('a');
+    this.ampCfSurvey.setData({
       email: this.store.email,
       name: this.store.name,
-      created_at: new Date(),
-      campaign: this.store.campaignId,
+      survey:this.survey,
+      created_at: new Date().getTime(),
+      force:true
     });
 
-    this.ampNpsSurvey.run();
+
+    this.ampCfSurvey.run();
   }
 }
