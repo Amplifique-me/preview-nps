@@ -19,12 +19,17 @@ export class PreviewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.store.iframeUrl.length != 0) {
-      this.showIframe = true;
-    }
+
     if (this.route.snapshot.params.survey) {
       this.survey = this.route.snapshot.params.survey;
+      this.showIframe = false;
+      setTimeout(()=>this.showNpsSurvey(), 1000)
+    } else {
+      if (this.store.iframeUrl.length != 0) {
+        this.showIframe = true;
+      }
     }
+
     // this.showNpsSurvey();
   }
 
@@ -35,7 +40,7 @@ export class PreviewComponent implements OnInit {
       name: this.store.name,
       survey: this.survey,
       created_at: new Date().getTime(),
-      force: true,
+      force:true
     });
 
     this.ampCfSurvey.run();

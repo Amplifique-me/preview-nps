@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@amplifique.me/ngx-amplifiqueme": "13.0.2",
+    "@amplifique.me/ngx-amplifiqueme": "13.0.3",
     "@angular/animations": "~13.3.11",
     "@angular/common": "~13.3.11",
     "@angular/compiler": "~13.3.11",

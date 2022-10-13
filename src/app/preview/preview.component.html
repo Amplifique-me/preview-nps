@@ -1,6 +1,12 @@
 <iframe *ngIf="showIframe" class="iframe" (load)="showNpsSurvey()" [src]="store.iframeUrl | safe" frameborder="0"></iframe>
 
 
-<div *ngIf="!showIframe">
-
+<div class="app-test" *ngIf="!showIframe">
+  <!-- <div class="topbar"></div> -->
+  <!-- <div class="sidebar"></div> -->
+  <div class="body">
+    <h2>Teste do modo InApp</h2>
+    <span>A pesquisa aparecerá em alguns segundos</span>
+    <button class="amp-btn" (click)="showNpsSurvey()">Rodar novamente</button>
+  </div>
 </div>
