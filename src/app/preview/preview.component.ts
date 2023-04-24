@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PreviewComponent implements OnInit {
   showIframe = false;
   survey = this.store.campaignId;
+  public version = 1;
+  public identifier = '';
   constructor(
     public store: StoreService,
     public ampCfSurvey: AmpCfService,
@@ -25,10 +27,10 @@ export class PreviewComponent implements OnInit {
     if (this.route.snapshot.params.survey) {
       this.showIframe = false;
       this.survey = this.route.snapshot.params.survey;
-      let version = this.route.snapshot.queryParams.version || 1;
-      let identifier = this.route.snapshot.queryParams.identifier;
-      if (version == 2) {
-        this.ampSurveyService.load(identifier, true, false, true, this.survey).then(() => {
+      this.version =  this.route.snapshot.queryParams.version || 1;
+      this.identifier = this.route.snapshot.queryParams.identifier;
+      if (this.version == 2) {
+        this.ampSurveyService.load(this.identifier, true, false, true, this.survey).then(() => {
           this.ampSurveyService.identify(
             {
               email: this.store.email,
@@ -55,15 +57,37 @@ export class PreviewComponent implements OnInit {
   }
 
   showNpsSurvey() {
-    console.log('a');
-    this.ampCfSurvey.setData({
-      email: this.store.email,
-      name: this.store.name,
-      survey: this.survey,
-      created_at: new Date().getTime(),
-      force: true,
-    });
+    if(this.version == 1){
 
-    this.ampCfSurvey.run();
+      console.log('a');
+      this.ampCfSurvey.setData({
+        email: this.store.email,
+        name: this.store.name,
+        survey: this.survey,
+        created_at: new Date().getTime(),
+        force: true,
+      });
+
+      this.ampCfSurvey.run();
+    }else{
+      if (this.version == 2) {
+        this.ampSurveyService.load(this.identifier, true, false, true, this.survey).then(() => {
+          this.ampSurveyService.identify(
+            {
+              email: this.store.email,
+              name: this.store.name,
+              created_at: new Date().getTime(),
+            },
+            false
+          );
+          setTimeout(()=>{
+            this.ampSurveyService.run();
+
+          },2000)
+        });
+      }else{
+        setTimeout(() => this.showNpsSurvey(), 1000);
+      }
+    }
   }
 }
