@@ -9,14 +9,18 @@ import { StoreService } from '../_services/store.service';
 })
 export class HomeComponent implements OnInit {
 
-  
+
   constructor(public store:StoreService, public router: Router) { }
 
   ngOnInit(): void {
   }
 
   goToPreview(){
-    this.router.navigate(['preview']);
+    this.router.navigate([`preview/${this.store.campaignId}`],{
+      queryParams:{
+        version:2
+      }
+    });
   }
 
 }

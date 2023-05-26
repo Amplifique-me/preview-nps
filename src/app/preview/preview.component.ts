@@ -72,6 +72,7 @@ export class PreviewComponent implements OnInit {
       this.ampCfSurvey.run();
     }else{
       if (this.version == 2) {
+        //@ts-ignore
         this.ampSurveyService.load(this.identifier, 'true', 'false', 'true', this.survey).then(() => {
           this.ampSurveyService.identify(
             {
