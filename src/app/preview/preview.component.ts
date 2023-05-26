@@ -30,7 +30,8 @@ export class PreviewComponent implements OnInit {
       this.version =  this.route.snapshot.queryParams.version || 1;
       this.identifier = this.route.snapshot.queryParams.identifier;
       if (this.version == 2) {
-        this.ampSurveyService.load(this.identifier, true, false, true, this.survey).then(() => {
+        //@ts-ignore
+        this.ampSurveyService.load(this.identifier, 'true', 'false', 'true', this.survey).then(() => {
           this.ampSurveyService.identify(
             {
               email: this.store.email,
@@ -71,7 +72,7 @@ export class PreviewComponent implements OnInit {
       this.ampCfSurvey.run();
     }else{
       if (this.version == 2) {
-        this.ampSurveyService.load(this.identifier, true, false, true, this.survey).then(() => {
+        this.ampSurveyService.load(this.identifier, 'true', 'false', 'true', this.survey).then(() => {
           this.ampSurveyService.identify(
             {
               email: this.store.email,
