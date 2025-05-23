@@ -27,25 +27,35 @@ export class PreviewComponent implements OnInit {
     if (this.route.snapshot.params.survey) {
       this.showIframe = false;
       this.survey = this.route.snapshot.params.survey;
-      this.version =  this.route.snapshot.queryParams.version || 1;
+      this.version = this.route.snapshot.queryParams.version || 1;
       this.identifier = this.route.snapshot.queryParams.identifier;
       if (this.version == 2) {
+        const email = this.route.snapshot.queryParams.email;
+        const name = this.route.snapshot.queryParams.name;
+        if (email) {
+          this.store.email = email;
+          this.store.name = '';
+        }
+        if (name) {
+          this.store.name = name;
+        }
         //@ts-ignore
-        this.ampSurveyService.load(this.identifier, 'true', 'false', 'true', this.survey).then(() => {
-          this.ampSurveyService.identify(
-            {
-              email: this.store.email,
-              name: this.store.name,
-              created_at: new Date().getTime(),
-            },
-            false
-          );
-          setTimeout(()=>{
-            this.ampSurveyService.run();
-
-          },2000)
-        });
-      }else{
+        this.ampSurveyService
+          .load(this.identifier, 'true', 'false', 'true', this.survey)
+          .then(() => {
+            this.ampSurveyService.identify(
+              {
+                email: this.store.email,
+                name: this.store.name,
+                created_at: new Date().getTime(),
+              },
+              false
+            );
+            setTimeout(() => {
+              this.ampSurveyService.run();
+            }, 2000);
+          });
+      } else {
         setTimeout(() => this.showNpsSurvey(), 1000);
       }
     } else {
@@ -58,8 +68,7 @@ export class PreviewComponent implements OnInit {
   }
 
   showNpsSurvey() {
-    if(this.version == 1){
-
+    if (this.version == 1) {
       console.log('a');
       this.ampCfSurvey.setData({
         email: this.store.email,
@@ -70,24 +79,25 @@ export class PreviewComponent implements OnInit {
       });
 
       this.ampCfSurvey.run();
-    }else{
+    } else {
       if (this.version == 2) {
         //@ts-ignore
-        this.ampSurveyService.load(this.identifier, 'true', 'false', 'true', this.survey).then(() => {
-          this.ampSurveyService.identify(
-            {
-              email: this.store.email,
-              name: this.store.name,
-              created_at: new Date().getTime(),
-            },
-            false
-          );
-          setTimeout(()=>{
-            this.ampSurveyService.run();
-
-          },2000)
-        });
-      }else{
+        this.ampSurveyService
+          .load(this.identifier, 'true', 'false', 'true', this.survey)
+          .then(() => {
+            this.ampSurveyService.identify(
+              {
+                email: this.store.email,
+                name: this.store.name,
+                created_at: new Date().getTime(),
+              },
+              false
+            );
+            setTimeout(() => {
+              this.ampSurveyService.run();
+            }, 2000);
+          });
+      } else {
         setTimeout(() => this.showNpsSurvey(), 1000);
       }
     }
